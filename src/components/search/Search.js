@@ -1,9 +1,14 @@
 import './Search.css';
 
-const Search = () => {
+const Search = ({ inputValue, onInputChange }) => {
   return (
     <div className='--form-control'>
-      <input type='text' placeholder='Search Products' />
+      <input
+        type='text'
+        placeholder='Search Products'
+        value={inputValue}
+        onChange={onInputChange}
+      />
     </div>
   );
 };

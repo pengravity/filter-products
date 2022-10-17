@@ -1,6 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-import { items } from '../../products-data';
 import Categories from '../categories/Categories';
 import Search from '../search/Search';
 import Product from './Product';
@@ -9,23 +8,36 @@ import { productsData } from '../../products-data';
 
 const ProductList = () => {
   const [products, setProducts] = useState(productsData);
+  const [search, setSearch] = useState('');
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
+  useEffect(() => {
+    setFilteredProducts(
+      products.filter((product) =>
+        product.title.toLowerCase().includes(search.toLowerCase())
+      )
+    );
+  }, [search, products]);
 
   return (
     <>
-      {console.log(products)}
       <div className='header'>
         <header className='container'>
           <h1 className='--color-white --text-center'>
             <span className='--color-danger'> Product </span> Filter
           </h1>
           <div className='--flex-between --flex-dir-column --py'>
-            <Search />
+            <Search inputValue={search} onInputChange={handleSearch} />
             <Categories />
           </div>
         </header>
         <div className='product-container'>
           <div className='products container --grid-25 --py2'>
-            {products.map((product) => {
+            {filteredProducts.map((product) => {
               const { id, title, img, price } = product;
               return (
                 <div key={id}>
