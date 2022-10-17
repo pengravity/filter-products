@@ -1,11 +1,24 @@
 import './Categories.css';
 
-const Categories = () => {
+const capitalizeFirst = (word) => {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+};
+
+const Categories = ({ categories, filterItems }) => {
   return (
     <div className='--flex-center'>
-      <button type='button' className='btn --btn --btn-secondary'>
-        All
-      </button>
+      {categories.map((category, index) => {
+        return (
+          <button
+            type='button'
+            className='btn --btn --btn-secondary'
+            key={index}
+            onClick={() => filterItems(category)}
+          >
+            {capitalizeFirst(category)}
+          </button>
+        );
+      })}
     </div>
   );
 };
