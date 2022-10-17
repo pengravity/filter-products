@@ -8,16 +8,16 @@ const ProductList = () => {
     <>
       <div className='header'>
         <header className='container'>
-          <h1>
-            <span> Product </span> Filter
+          <h1 className='--color-white --text-center'>
+            <span className='--color-danger'> Product </span> Filter
           </h1>
-          <div>
+          <div className='--flex-between --flex-dir-column --py'>
             <Search />
             <Categories />
           </div>
         </header>
         <div className='product-container'>
-          <div className='products container'>
+          <div className='products container --grid-25 --py2'>
             <Product />
           </div>
         </div>
